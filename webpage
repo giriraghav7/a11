@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlavorHive | Where Food Lovers Gather</title>
+    <style>
+        :root {
+            --primary-color: #FFA500;
+            --secondary-color: #FF8C00;
+            --accent-color: #FF6347;
+            --dark-color: #333;
+            --light-color: #FFF8E1;
+            --text-color: #333;
+            --text-light: #666;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        nav ul li a:hover {
+            color: var(--light-color);
+            text-decoration: underline;
+        }
+        
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .menu-toggle .bar {
+            background-color: white;
+            height: 3px;
+            width: 25px;
+            margin: 3px 0;
+        }
+        
+        .hero {
+            background: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            color: white;
+            max-width: 600px;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: #e04a2d;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid white;
+            margin-left: 1rem;
+        }
+        
+        .btn-outline:hover {
+            background-color: white;
+            color: var(--accent-color);
+        }
+        
+        .section {
+            padding: 4rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--dark-color);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary-color);
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .feature-img {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .feature-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .feature-card:hover .feature-img img {
+            transform: scale(1.1);
+        }
+        
+        .feature-content {
+            padding: 1.5rem;
+        }
+        
+        .feature-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark-color);
+        }
+        
+        .feature-content p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+        }
+        
+        .testimonials {
+            background-color: var(--light-color);
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .testimonial-card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .testimonial-card .quote {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            color: var(--text-light);
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .author-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 1rem;
+        }
+        
+        .author-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .author-info h4 {
+            font-size: 1.1rem;
+            color: var(--dark-color);
+        }
+        
+        .author-info p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+        
+        .gallery-item {
+            height: 250px;
+            overflow: hidden;
+            border-radius: 10px;
+            position: relative;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            color: white;
+            padding: 1rem;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+        
+        .newsletter {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            text-align: center;
+            padding: 4rem 0;
+        }
+        
+        .newsletter h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .newsletter p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .newsletter-form input {
+            flex: 1;
+            padding: 1rem;
+            border: none;
+            border-radius: 30px 0 0 30px;
+            font-size: 1rem;
+        }
+        
+        .newsletter-form button {
+            padding: 0 2rem;
+            border-radius: 0 30px 30px 0;
+            border: none;
+            background-color: var(--accent-color);
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .newsletter-form button:hover {
+            background-color: #e04a2d;
+        }
+        
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-column ul li a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-column ul li a:hover {
+            color: var(--primary-color);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                display: none;
+                flex-direction: column;
+                background-color: var(--dark-color);
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                padding: 1rem 0;
+            }
+
+            nav ul.active {
+                display: flex;
+            }
+            
+            nav ul li {
+                margin: 1rem 0;
+                text-align: center;
+            }
+            
+            .menu-toggle {
+                display: flex;
+            }
+            
+            .hero {
+                height: 400px;
+                text-align: center;
+            }
+            
+            .hero-content {
+                max-width: 100%;
+                padding: 0 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .btn-group {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .btn-outline {
+                margin-left: 0;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .newsletter-form input,
+            .newsletter-form button {
+                border-radius: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <img src="https://cdn-icons-png.flaticon.com/512/2734/2734046.png" alt="FlavorHive Logo">
+                <span>FlavorHive</span>
+            </div>
+            <nav>
+                <ul id="nav-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Discover</a></li>
+                    <li><a href="#">Reviews</a></li>
+                    <li><a href="#">Community</a></li>
+                    <li><a href="#">About</a></li>
+                </ul>
+                <div class="menu-toggle" id="mobile-menu">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>Discover & Share Culinary Treasures</h1>
+            <p>Join our buzzing community of food lovers, critics, and explorers as we uncover the world's most delicious flavors together.</p>
+            <div class="btn-group">
+                <a href="#" class="btn">Join the Hive</a>
+                <a href="#" class="btn btn-outline">Explore Flavors</a>
+            </div>
+        </div>
+    </section>
+    
+    <section class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Why Join FlavorHive?</h2>
+            </div>
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-img">
+                        <img src="https://images.unsplash.com/photo-1559847844-5315695dadae?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Community">
+                    </div>
+                    <div class="feature-content">
+                        <h3>Vibrant Community</h3>
+                        <p>Connect with fellow food enthusiasts who share your passion. Exchange recipes, restaurant recommendations, and culinary stories.</p>
+                        <a href="#" class="btn">Learn More</a>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-img">
+                        <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Discover">
+                    </div>
+                    <div class="feature-content">
+                        <h3>Hidden Gems</h3>
+                        <p>Discover local favorites and off-the-beaten-path eateries you won't find on mainstream review sites.</p>
+                        <a href="#" class="btn">Learn More</a>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-img">
+                        <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Authentic">
+                    </div>
+                    <div class="feature-content">
+                        <h3>Authentic Reviews</h3>
+                        <p>Read and share honest, detailed reviews from real people who care about food as much as you do.</p>
+                        <a href="#" class="btn">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="section testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>What Our Members Say</h2>
+            </div>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <div class="quote">
+                        "FlavorHive helped me discover the most amazing family-run Italian place in my neighborhood that I'd walked past for years without noticing!"
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-img">
+                            <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Sarah J.">
+                        </div>
+                        <div class="author-info">
+                            <h4>Sarah J.</h4>
+                            <p>Food Blogger</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="quote">
+                        "As a professional chef, I appreciate the thoughtful reviews and the community's palate. It's my go-to for honest feedback on new dishes."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-img">
+                            <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Miguel R.">
+                        </div>
+                        <div class="author-info">
+                            <h4>Miguel R.</h4>
+                            <p>Executive Chef</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="quote">
+                        "I've made so many friends through FlavorHive's food events and tasting groups. It's more than reviews - it's a community."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-img">
+                            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Priya K.">
+                        </div>
+                        <div class="author-info">
+                            <h4>Priya K.</h4>
+                            <p>Home Cook</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Recent Discoveries</h2>
+            </div>
+            <div class="gallery">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1544025162-d76694265947?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Japanese Ramen">
+                    <div class="gallery-overlay">
+                        <h3>Tokyo-Style Ramen</h3>
+                        <p>Rated 4.9 by 127 members</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1510626176961-4b57d4fbad03?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Artisan Pizza">
+                    <div class="gallery-overlay">
+                        <h3>Wood-Fired Pizza</h3>
+                        <p>Rated 4.8 by 94 members</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Gourmet Burger">
+                    <div class="gallery-overlay">
+                        <h3>Signature Burger</h3>
+                        <p>Rated 4.7 by 156 members</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Vegan Bowl">
+                    <div class="gallery-overlay">
+                        <h3>Rainbow Vegan Bowl</h3>
+                        <p>Rated 4.9 by 82 members</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="French Pastries">
+                    <div class="gallery-overlay">
+                        <h3>Artisan Patisserie</h3>
+                        <p>Rated 5.0 by 63 members</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Gourmet Dish">
+                    <div class="gallery-overlay">
+                        <h3>Chef's Special</h3>
+                        <p>Rated 4.8 by 112 members</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="section">
+    <div class="container">
+        <div class="section-title">
+            <h2>Discover Restaurants & Menus</h2>
+        </div>
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-img">
+                    <img src="https://images.unsplash.com/photo-1551446591-142875a901a1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Burger King">
+                </div>
+                <div class="feature-content">
+                    <h3>Burger King</h3>
+                    <p>Experience fine dining with a modern twist.</p>
+                    <ul>
+                        <li>Truffle Risotto</li>
+                        <li>Seared Scallops</li>
+                        <li>Wagyu Beef Steak</li>
+                        <li>Chocolate Lava Cake</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-img">
+                    <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Mandeez Kitchen">
+                </div>
+                <div class="feature-content">
+                    <h3>Mandeez Kitchen</h3>
+                    <p>Homestyle cooking that warms the heart.</p>
+                    <ul>
+                        <li>Classic Meatloaf</li>
+                        <li>Chicken Pot Pie</li>
+                        <li>Mashed Potatoes & Gravy</li>
+                        <li>Apple Pie</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-img">
+                    <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Sushi Haven">
+                </div>
+                <div class="feature-content">
+                    <h3>Sushi Haven</h3>
+                    <p>Fresh sushi and sashimi crafted to perfection.</p>
+                    <ul>
+                        <li>Dragon Roll</li>
+                        <li>Spicy Tuna Roll</li>
+                        <li>Salmon Sashimi</li>
+                        <li>Matcha Ice Cream</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-img">
+                    <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="La Bella Italia">
+                </div>
+                <div class="feature-content">
+                    <h3>La Bella Italia</h3>
+                    <p>Authentic Italian cuisine in a cozy setting.</p>
+                    <ul>
+                        <li>Margherita Pizza</li>
+                        <li>Fettuccine Alfredo</li>
+                        <li>Tiramisu</li>
+                        <li>Espresso</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-img">
+                    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Spice Symphony">
+                </div>
+                <div class="feature-content">
+                    <h3>Spice Symphony</h3>
+                    <p>A fusion of bold flavors from around the world.</p>
+                    <ul>
+                        <li>Butter Chicken</li>
+                        <li>Pad Thai</li>
+                        <li>Beef Rendang</li>
+                        <li>Mango Sticky Rice</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+    
+    <section class="section newsletter">
+        <div class="container">
+            <h2>Join Our Culinary Community</h2>
+            <p>Subscribe to get weekly food discoveries, exclusive member events, and the latest buzz from FlavorHive.</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Your email address">
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+    </section>
+    
+    <section class="section">
+    <div class="container">
+        <div class="section-title">
+            <h2>User Reviews</h2>
+        </div>
+        <div id="reviews">
+            <!-- User reviews will be displayed here -->
+        </div>
+        <div class="review-form">
+            <h3>Submit Your Review</h3>
+            <form id="reviewForm">
+                <input type="text" id="name" placeholder="Your Name" required>
+                <textarea id="review" placeholder="Write your review here..." required></textarea>
+                <button type="submit" class="btn">Submit Review</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>FlavorHive</h3>
+                    <p>Where food enthusiasts, critics, and casual diners come together to explore, review, and celebrate the world of flavors.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f">f</i></a>
+                        <a href="#"><i class="fab fa-instagram">i</i></a>
+                        <a href="#"><i class="fab fa-twitter">t</i></a>
+                        <a href="#"><i class="fab fa-pinterest">p</i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Explore</h3>
+                    <ul>
+                        <li><a href="#">Popular Restaurants</a></li>
+                        <li><a href="#">Hidden Gems</a></li>
+                        <li><a href="#">Food Events</a></li>
+                        <li><a href="#">Cooking Classes</a></li>
+                        <li><a href="#">Food Tours</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Community</h3>
+                    <ul>
+                        <li><a href="#">Forums</a></li>
+                        <li><a href="#">Local Groups</a></li>
+                        <li><a href="#">Member Spotlights</a></li>
+                        <li><a href="#">Recipe Exchange</a></li>
+                        <li><a href="#">Food Challenges</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Press</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 FlavorHive. All rights reserved. The buzz is real!</p>
+            </div>
+        </div>
+    </footer>
+    <script>
+    document.getElementById('reviewForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const name = document.getElementById('name').value;
+        const review = document.getElementById('review').value;
+
+        const reviewContainer = document.createElement('div');
+        reviewContainer.classList.add('review');
+        reviewContainer.innerHTML = `
+            <h4>${name}</h4>
+            <p>${review}</p>
+        `;
+
+        document.getElementById('reviews').appendChild(reviewContainer);
+
+        // Clear the form
+        document.getElementById('name').value = '';
+        document.getElementById('review').value = '';
+    });
+
+    const mobileMenu = document.getElementById('mobile-menu');
+    const navLinks = document.getElementById('nav-links');
+
+    mobileMenu.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+    });
+</script>
+</body>
+</html>
