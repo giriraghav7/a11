@@ -517,6 +517,22 @@
                 border-radius: 30px;
             }
         }
+
+        .login-btn {
+            margin-left: 1rem;
+            padding: 0.5rem 1rem;
+            border: 2px solid white;
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .login-btn:hover {
+            background-color: white;
+            color: var(--accent-color);
+        }
     </style>
 </head>
 <body>
@@ -529,10 +545,10 @@
             <nav>
                 <ul id="nav-links">
                     <li><a href="#">Home</a></li>
-                    <li><a href="#">Discover</a></li>
-                    <li><a href="#">Reviews</a></li>
-                    <li><a href="#">Community</a></li>
-                    <li><a href="#">About</a></li>
+                    <li><a href="#recent-discoveries">Discoveries</a></li>
+                    <li><a href="#member-reviews">Reviews</a></li>
+                    <li><a href="#culinary-community">Community</a></li>
+                    <li><a href="#about-us">About</a></li>
                 </ul>
                 <div class="menu-toggle" id="mobile-menu">
                     <span class="bar"></span>
@@ -540,6 +556,7 @@
                     <span class="bar"></span>
                 </div>
             </nav>
+            <a href="login.html" class="btn btn-outline login-btn">Login</a>
         </div>
     </header>
     
@@ -599,6 +616,7 @@
     <section class="section testimonials">
         <div class="container">
             <div class="section-title">
+                <div id="member-reviews"></div>
                 <h2>What Our Members Say</h2>
             </div>
             <div class="testimonial-grid">
@@ -653,6 +671,7 @@
     <section class="section">
         <div class="container">
             <div class="section-title">
+                <div id="recent-discoveries"></div>
                 <h2>Recent Discoveries</h2>
             </div>
             <div class="gallery">
@@ -722,8 +741,8 @@
                     <p>Experience fine dining with a modern twist.</p>
                     <ul>
                         <li>Truffle Risotto</li>
-                        <li>Seared Scallops</li>
-                        <li>Wagyu Beef Steak</li>
+                        <li>Paneer whopper</li>
+                        <li>Wagyu Beef burger</li>
                         <li>Chocolate Lava Cake</li>
                     </ul>
                 </div>
@@ -798,6 +817,7 @@
     
     <section class="section newsletter">
         <div class="container">
+            <div id ="culinary-community"></div>
             <h2>Join Our Culinary Community</h2>
             <p>Subscribe to get weekly food discoveries, exclusive member events, and the latest buzz from FlavorHive.</p>
             <form class="newsletter-form">
@@ -813,7 +833,6 @@
             <h2>User Reviews</h2>
         </div>
         <div id="reviews">
-            <!-- User reviews will be displayed here -->
         </div>
         <div class="review-form">
             <h3>Submit Your Review</h3>
@@ -830,6 +849,7 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-column">
+                    <div id ="about-us"></div>
                     <h3>FlavorHive</h3>
                     <p>Where food enthusiasts, critics, and casual diners come together to explore, review, and celebrate the world of flavors.</p>
                     <div class="social-links">
